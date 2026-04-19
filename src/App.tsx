@@ -24,7 +24,7 @@ import {
   Shapes,
   Instagram
 } from "lucide-react";
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 
 const BUSINESS_NAME = "Rachna's Artzooka Studio";
 const PHONE = "9977211509";
@@ -37,11 +37,25 @@ const HOURS = "Mon, Wed, Fri 5-8pm";
 
 export default function App() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  const [formData, setFormData] = useState({
+    name: "",
+    program: "Diploma in Fine Arts",
+    message: ""
+  });
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
   });
+
+  const handleWhatsAppInquiry = (e: React.FormEvent) => {
+    e.preventDefault();
+    const text = `Hello! I'm ${formData.name}. I'm interested in the ${formData.program} program. 
+
+Message: ${formData.message}`;
+    const encodedText = encodeURIComponent(text);
+    window.open(`https://wa.me/${WHATSAPP}?text=${encodedText}`, "_blank");
+  };
 
   const mainServices = [
     {
@@ -160,7 +174,7 @@ export default function App() {
               <span className="text-xs font-black uppercase tracking-[0.2em] text-slate-700">Indore's Premier Creative Studio</span>
             </div>
             
-            <h1 className="font-display text-[clamp(3.5rem,8vw,6rem)] font-black leading-[0.85] tracking-tighter mb-10">
+            <h1 className="font-display text-[clamp(2.75rem,8vw,6rem)] font-black leading-[0.85] tracking-tighter mb-10">
               CRAFT YOUR <span className="text-primary">LEGACY</span><br />
               THROUGH <span className="brush-underline italic text-red-600">COLOR</span>
             </h1>
@@ -257,14 +271,14 @@ export default function App() {
                 target="_blank"
                 rel="noreferrer"
                 whileHover={{ scale: 1.02 }}
-                className="group relative p-12 bg-white/[0.03] backdrop-blur-2xl rounded-[3rem] border border-white/5 overflow-hidden transition-all shadow-2xl hover:shadow-primary/10 block"
+                className="group relative p-8 md:p-12 bg-white/[0.03] backdrop-blur-2xl rounded-[3rem] border border-white/5 overflow-hidden transition-all shadow-2xl hover:shadow-primary/10 block"
               >
                 <div className={`w-16 h-16 ${s.color} rounded-2xl flex items-center justify-center mb-8 shadow-2xl shadow-black group-hover:scale-110 transition-transform`}>
                   {s.icon}
                 </div>
                 <h3 className="font-display text-2xl font-black mb-4 uppercase tracking-tighter">{s.title}</h3>
                 <p className="text-slate-400 text-sm leading-relaxed mb-10">{s.description}</p>
-                <div className="absolute bottom-10 left-12 right-12 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="absolute bottom-8 md:bottom-10 left-8 md:left-12 right-8 md:right-12 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity">
                    <div className={`font-mono text-[10px] font-bold uppercase tracking-widest ${s.accent}`}>Inquire Now</div>
                    <ArrowUpRight className={`w-4 h-4 ${s.accent}`} />
                 </div>
@@ -284,7 +298,7 @@ export default function App() {
             transition={{ duration: 1 }}
             className="relative"
           >
-            <div className="aspect-[4/5] rounded-[3rem] overflow-hidden border-8 border-slate-50 shadow-2xl">
+            <div className="aspect-[4/5] rounded-[2rem] md:rounded-[3rem] overflow-hidden border-4 md:border-8 border-slate-50 shadow-2xl">
               <img 
                 src="https://i.postimg.cc/zG4FBGWq/rachna-joshi.jpg" 
                 alt="Rachna S Joshi"
@@ -292,9 +306,9 @@ export default function App() {
                 referrerPolicy="no-referrer"
               />
             </div>
-            <div className="absolute -bottom-10 -right-10 bg-primary text-white p-8 rounded-3xl shadow-2xl max-w-xs animate-float">
-               <Star className="w-8 h-8 text-orange-400 mb-4" />
-               <div className="font-display text-2xl font-black italic">"Art is not what you see, but what you make others see."</div>
+            <div className="absolute -bottom-6 -right-4 md:-bottom-10 md:-right-10 bg-primary text-white p-6 md:p-8 rounded-2xl md:rounded-3xl shadow-2xl max-w-[200px] md:max-w-xs animate-float">
+               <Star className="w-6 h-6 md:w-8 md:h-8 text-orange-400 mb-4" />
+               <div className="font-display text-lg md:text-2xl font-black italic">"Art is not what you see, but what you make others see."</div>
             </div>
           </motion.div>
 
@@ -347,15 +361,15 @@ export default function App() {
               <motion.div 
                 key={i}
                 whileHover={{ y: -10 }}
-                className={`group relative h-[600px] rounded-[2.5rem] overflow-hidden shadow-2xl transition-all duration-500 ${
+                className={`group relative h-[400px] md:h-[600px] rounded-[2.5rem] overflow-hidden shadow-2xl transition-all duration-500 ${
                   i === categories.length - 1 ? "lg:col-start-2 lg:col-span-2 sm:col-span-2" : ""
                 }`}
               >
                 <img src={cat.img} alt={cat.name} className="absolute inset-0 w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-1000" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/10 to-transparent" />
-                <div className="absolute bottom-12 left-12 pr-12">
-                   <span className="font-mono text-white/40 text-xs block mb-2 tracking-[0.5em]">MODULE 0{i+1}</span>
-                   <h4 className="text-white font-display text-4xl font-black tracking-tighter uppercase leading-none">{cat.name}</h4>
+                <div className="absolute bottom-8 left-8 md:bottom-12 md:left-12 pr-12">
+                   <span className="font-mono text-white/40 text-[10px] md:text-xs block mb-2 tracking-[0.5em]">MODULE 0{i+1}</span>
+                   <h4 className="text-white font-display text-2xl md:text-4xl font-black tracking-tighter uppercase leading-none">{cat.name}</h4>
                 </div>
               </motion.div>
             ))}
@@ -367,7 +381,7 @@ export default function App() {
       <section className="pt-24 pb-0 bg-white relative overflow-hidden">
         <div className="max-w-screen-2xl mx-auto px-6 grid lg:grid-cols-2 gap-32 items-center">
           <div className="relative order-2 lg:order-1">
-             <div className="mask-paint-blob scale-150 relative bg-slate-100 overflow-hidden aspect-square flex items-center justify-center">
+             <div className="mask-paint-blob scale-110 md:scale-150 relative bg-slate-100 overflow-hidden aspect-square flex items-center justify-center">
                 <img src="https://picsum.photos/seed/artz_mastery/800/800" className="w-[120%] h-[120%] object-cover contrast-110" referrerPolicy="no-referrer" />
              </div>
              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-blue-500/10 rounded-full blur-[100px] -z-10" />
@@ -404,11 +418,11 @@ export default function App() {
       </section>
 
       {/* Luxury Contact */}
-      <section id="contact" className="pb-24 pt-4 px-6">
-        <div className="max-w-screen-2xl mx-auto glass-card rounded-[4rem] overflow-hidden shadow-[0_100px_150px_-50px_rgba(0,0,0,0.1)]">
+      <section id="contact" className="pb-24 pt-4 px-4 md:px-6">
+        <div className="max-w-screen-2xl mx-auto glass-card rounded-[2.5rem] md:rounded-[4rem] overflow-hidden shadow-[0_100px_150px_-50px_rgba(0,0,0,0.1)]">
            <div className="grid lg:grid-cols-[1fr_1.8fr]">
-              <div className="bg-slate-950 p-16 md:p-24 text-white">
-                 <h2 className="font-display text-5xl font-black tracking-tighter mb-12 italic leading-none">JOIN THE<br /><span className="not-italic text-blue-500 tracking-normal underline underline-offset-8 decoration-orange-500">STUDIO</span>.</h2>
+              <div className="bg-slate-950 p-8 md:p-24 text-white">
+                 <h2 className="font-display text-4xl md:text-5xl font-black tracking-tighter mb-12 italic leading-none">JOIN THE<br /><span className="not-italic text-blue-500 tracking-normal underline underline-offset-8 decoration-orange-500">STUDIO</span>.</h2>
                  
                  <div className="space-y-12">
                    <div className="flex gap-6">
@@ -447,16 +461,27 @@ export default function App() {
                  </div>
               </div>
 
-              <div className="p-16 md:p-24 bg-white relative">
+              <div className="p-8 md:p-24 bg-white relative">
                  <div className="max-w-xl">
-                   <h3 className="font-display text-4xl font-black tracking-tighter uppercase mb-12 leading-[0.8]"><span className="text-primary tracking-normal block text-xl mb-4 italic not-uppercase font-serif">Hello Creative!</span> RESERVE YOUR SPOT.</h3>
-                   <form className="space-y-10" onSubmit={e => e.preventDefault()}>
+                   <h3 className="font-display text-2xl md:text-4xl font-black tracking-tighter uppercase mb-12 leading-[0.8]"><span className="text-primary tracking-normal block text-xl mb-4 italic not-uppercase font-serif">Hello Creative!</span> RESERVE YOUR SPOT.</h3>
+                   <form className="space-y-10" onSubmit={handleWhatsAppInquiry}>
                      <div className="group relative">
-                       <input type="text" className="w-full bg-transparent border-b-2 border-slate-100 py-4 font-bold text-xl focus:outline-none focus:border-primary transition-colors placeholder:text-transparent peer" placeholder="Full Name" />
+                       <input 
+                         type="text" 
+                         required
+                         value={formData.name}
+                         onChange={e => setFormData({ ...formData, name: e.target.value })}
+                         className="w-full bg-transparent border-b-2 border-slate-100 py-4 font-bold text-xl focus:outline-none focus:border-primary transition-colors placeholder:text-transparent peer" 
+                         placeholder="Full Name" 
+                       />
                        <label className="absolute left-0 top-4 text-slate-300 font-bold text-xl pointer-events-none transition-all peer-focus:-top-6 peer-focus:text-primary peer-focus:text-xs uppercase tracking-widest peer-[:not(:placeholder-shown)]:-top-6 peer-[:not(:placeholder-shown)]:text-xs">Full Name</label>
                      </div>
                      <div className="group relative">
-                       <select className="w-full bg-transparent border-b-2 border-slate-100 py-4 font-bold text-xl focus:outline-none focus:border-primary transition-colors appearance-none">
+                       <select 
+                         value={formData.program}
+                         onChange={e => setFormData({ ...formData, program: e.target.value })}
+                         className="w-full bg-transparent border-b-2 border-slate-100 py-4 font-bold text-xl focus:outline-none focus:border-primary transition-colors appearance-none"
+                       >
                          <option>Diploma in Fine Arts</option>
                          <option>NID / NIFT Preparation</option>
                          <option>BFA Entrance Coaching</option>
@@ -465,10 +490,16 @@ export default function App() {
                        <label className="absolute left-0 -top-6 text-primary text-xs font-bold uppercase tracking-widest">Select Program</label>
                      </div>
                      <div className="group relative">
-                       <textarea className="w-full bg-transparent border-b-2 border-slate-100 py-4 font-bold text-xl focus:outline-none focus:border-primary transition-colors min-h-[100px] resize-none peer" placeholder="Message"></textarea>
+                       <textarea 
+                         required
+                         value={formData.message}
+                         onChange={e => setFormData({ ...formData, message: e.target.value })}
+                         className="w-full bg-transparent border-b-2 border-slate-100 py-4 font-bold text-xl focus:outline-none focus:border-primary transition-colors min-h-[100px] resize-none peer" 
+                         placeholder="Message"
+                       ></textarea>
                        <label className="absolute left-0 top-4 text-slate-300 font-bold text-xl pointer-events-none transition-all peer-focus:-top-6 peer-focus:text-primary peer-focus:text-xs uppercase tracking-widest peer-[:not(:placeholder-shown)]:-top-6 peer-[:not(:placeholder-shown)]:text-xs">Your Message</label>
                      </div>
-                     <button className="w-full bg-slate-950 text-white py-6 rounded-3xl font-black text-xl uppercase tracking-widest hover:bg-orange-500 hover:scale-[1.02] active:scale-95 transition-all shadow-2xl flex items-center justify-center gap-4">
+                    <button type="submit" className="w-full bg-slate-950 text-white py-6 rounded-3xl font-black text-xl uppercase tracking-widest hover:bg-orange-500 hover:scale-[1.02] active:scale-95 transition-all shadow-2xl flex items-center justify-center gap-4">
                        Send Inquiry
                        <ArrowUpRight className="w-6 h-6" />
                      </button>
