@@ -378,22 +378,15 @@ Message: ${formData.message}`;
       </section>
 
       {/* Relational Trust */}
-      <section className="pt-24 pb-0 bg-white relative overflow-hidden">
-        <div className="max-w-screen-2xl mx-auto px-6 grid lg:grid-cols-2 gap-32 items-center">
-          <div className="relative order-2 lg:order-1">
-             <div className="mask-paint-blob scale-110 md:scale-150 relative bg-slate-100 overflow-hidden aspect-square flex items-center justify-center">
-                <img src="https://picsum.photos/seed/artz_mastery/800/800" className="w-[120%] h-[120%] object-cover contrast-110" referrerPolicy="no-referrer" />
-             </div>
-             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-blue-500/10 rounded-full blur-[100px] -z-10" />
-          </div>
-
-          <div className="order-1 lg:order-2">
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="max-w-screen-xl mx-auto px-6">
+          <div className="max-w-3xl mx-auto text-center lg:text-left">
             <h2 className="font-display text-5xl md:text-6xl font-black tracking-tighter mb-12 uppercase leading-[0.85] italic">
               UNCOMPROMISED<br /><span className="text-primary not-italic tracking-normal">TECHNICAL</span><br />MASTERY.
             </h2>
             
             <div className="space-y-16">
-              <div className="grid grid-cols-[80px_1fr] items-start gap-8">
+              <div className="grid sm:grid-cols-[80px_1fr] items-start gap-8 text-left">
                 <div className="w-20 h-20 bg-slate-950 rounded-2xl flex items-center justify-center text-white p-4">
                   <Shapes className="w-full h-full" />
                 </div>
@@ -403,7 +396,7 @@ Message: ${formData.message}`;
                 </div>
               </div>
               
-              <div className="grid grid-cols-[80px_1fr] items-start gap-8">
+              <div className="grid sm:grid-cols-[80px_1fr] items-start gap-8 text-left">
                 <div className="w-20 h-20 bg-orange-500 rounded-2xl flex items-center justify-center text-white p-4">
                   <Star className="w-full h-full" />
                 </div>
